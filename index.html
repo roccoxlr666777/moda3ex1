@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Certificate: Fashion & Design Simulator A1</title>
+    <style>
+        /* =========================================================
+           1. REGLAS DE DISEÑO Y ESTÉTICA (Pink, Blanco y Dorado)
+           ========================================================= */
+        :root {
+            --bg-color: #fff5f8;
+            --surface-color: #ffffff;
+            --text-color: #333333;
+            --primary-pink: #e81e63;
+            --accent-gold: #d4af37;
+            --gray-light: #fce4ec;
+            --border-width: 4px;
+            --error-color: #f44336;
+            --noun-color: #e81e63;
+            --verb-color: #d4af37;
+            --adj-color: #9c27b0;
+            --prep-color: #00bcd4; /* Color para preposiciones/artículos */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 60px;
+        }
+
+        h1, h2, h3, h4 {
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--primary-pink);
+        }
+
+        .mono {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            color: var(--primary-pink);
+        }
+
+        button, .btn {
+            display: block;
+            width: 100%;
+            background: var(--surface-color);
+            color: var(--primary-pink);
+            border: var(--border-width) solid var(--primary-pink);
+            padding: 15px 24px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 4px 4px 0px var(--accent-gold);
+            margin-top: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        button:hover, .btn:hover {
+            background: var(--primary-pink);
+            color: var(--surface-color);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px var(--accent-gold);
+        }
+
+        button:active {
+            transform: translate(2px, 2px);
+            box-shadow: 0px 0px 0px var(--accent-gold);
+        }
+
+        input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 15px;
+            border: var(--border-width) solid var(--primary-pink);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            outline: none;
+            transition: 0.2s;
+            appearance: none;
+            border-radius: 0;
+            background: #ffffff;
+            color: var(--text-color);
+        }
+
+        input:focus, textarea:focus {
+            border-left: 15px solid var(--accent-gold);
+            background: #fffafa;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-top: 100px; 
+        }
+
+        .phase-screen {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .phase-screen.active {
+            display: block;
+        }
+
+        .story-box {
+            border-left: 10px solid var(--accent-gold);
+            padding: 20px;
+            background: var(--gray-light);
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        .wiki-vocab {
+            border: 2px solid var(--primary-pink);
+            padding: 20px;
+            margin-top: 15px;
+            margin-bottom: 25px;
+            background: #ffffff;
+            position: relative;
+            font-size: 1rem;
+        }
+        
+        .wiki-vocab::before {
+            content: "GLOSSARY / VOCABULARIO";
+            position: absolute;
+            top: -12px;
+            left: 15px;
+            background: #ffffff;
+            color: var(--primary-pink);
+            padding: 0 8px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            border: 2px solid var(--primary-pink);
+            text-transform: uppercase;
+        }
+
+        .pos-noun { color: var(--noun-color); font-weight: 900; }
+        .pos-verb { color: var(--verb-color); font-weight: 900; }
+        .pos-adj { color: var(--adj-color); font-weight: 900; }
+        .pos-prep { color: var(--prep-color); font-weight: 900; }
+
+        .grammar-tag {
+            display: inline-block;
+            background: var(--accent-gold);
+            color: #ffffff;
+            padding: 5px 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            box-shadow: 2px 2px 0px var(--primary-pink);
+        }
+
+        .btn-hint {
+            font-size: 0.85rem;
+            padding: 8px 16px;
+            border: 2px dashed var(--primary-pink);
+            box-shadow: 3px 3px 0px var(--accent-gold);
+            width: auto;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .hint-box {
+            display: none;
+            background: #fdfdfd;
+            padding: 15px;
+            border-left: 6px dashed var(--accent-gold);
+            margin-bottom: 20px;
+            font-style: italic;
+            color: #555;
+        }
+
+        /* =========================================================
+           2. BARRA SUPERIOR (DASHBOARD)
+           ========================================================= */
+        #dashboard {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--surface-color);
+            border-bottom: var(--border-width) solid var(--primary-pink);
+            z-index: 1000;
+            display: none;
+            padding: 12px 20px;
+            box-shadow: 0px 4px 0px rgba(212, 175, 55, 0.2);
+            transition: background 0.3s;
+        }
+
+        .dash-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dash-stat {
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--primary-pink);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: var(--gray-light);
+            border: 2px solid var(--primary-pink);
+            margin-top: 8px;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-gold);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* =========================================================
+           3. MODALES Y LIENZO
+           ========================================================= */
+        #feedback-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(232, 30, 99, 0.85); 
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--surface-color);
+            border: var(--border-width) solid var(--accent-gold);
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 10px 10px 0px #ffffff;
+            text-align: left;
+        }
+
+        canvas.signature-pad {
+            border: var(--border-width) dashed var(--accent-gold);
+            background: #fffafa;
+            cursor: crosshair;
+            width: 100%;
+            max-width: 100%;
+            touch-action: none;
+            margin-top: 10px;
+        }
+
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(8px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+
+        /* =========================================================
+           4. PANTALLA DE RESULTADOS Y PRINT
+           ========================================================= */
+        #results { display: none; }
+
+        .certificate {
+            border: 8px double var(--accent-gold);
+            padding: 40px;
+            background: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        .plaque-header {
+            text-align: center;
+            border-bottom: 4px solid var(--primary-pink);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+
+        table, th, td { border: 2px solid var(--primary-pink); }
+        th, td { padding: 12px; text-align: left; }
+        th { background: var(--primary-pink); color: #ffffff; text-transform: uppercase; }
+
+        .print-actions { text-align: center; margin: 40px 0; }
+
+        .audit-section {
+            margin-top: 40px;
+            border-top: 4px dashed var(--accent-gold);
+            padding-top: 20px;
+        }
+
+        @media print {
+            body { background: #ffffff; padding: 0; color: #000000; }
+            h1, h2, h3, h4, .mono { color: #000000; }
+            .certificate { border: 4px solid #000000; padding: 20px; margin: 0; page-break-inside: avoid; }
+            .plaque-header { border-bottom: 4px solid #000000; }
+            table, th, td { border: 2px solid #000000; }
+            th { background: #000000; color: #ffffff; }
+            #dashboard, .btn-no-print, .print-actions, .audit-section { display: none !important; }
+            .container { padding-top: 0; margin: 0; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="dashboard">
+        <div class="dash-inner">
+            <div class="dash-stat">🕒 <span id="dash-time" class="mono">60:00</span></div>
+            <div class="dash-stat">ENGLISH A1: FASHION & DESIGN</div>
+            <div class="dash-stat mono">SCORE: <span id="dash-score">0%</span></div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="dash-progress"></div></div>
+    </div>
+
+    <div class="container">
+        
+        <div id="landing" class="phase-screen active">
+            <h1 style="text-align: center; color: var(--primary-pink);">ENGLISH LANGUAGE ASSESSMENT</h1>
+            <h3 style="text-align: center; margin-bottom: 25px; color: var(--accent-gold);">FASHION & DESIGN ACADEMY</h3>
+            
+            <div class="story-box">
+                <p><strong>INSTRUCCIONES INSTITUCIONALES:</strong></p>
+                <p>Welcome to the A1 Fashion & Design English Simulator. Tienes <strong>60 minutos</strong> para completar 10 situaciones comunicativas enfocadas en moda y estética.</p><br>
+                <p>• Los reactivos evalúan tiempos <strong>Simples</strong> (Present, Past, Future) y <strong>Continuos</strong>.</p>
+                <p>• Utiliza el vocabulario proporcionado (rosa, blanco, dorado, ropa, diseño, etc.).</p>
+                <p>• <strong>Puntuación:</strong> Obtén más del 50% para acreditar el nivel A1.</p>
+                <p>• <strong>Máxima Flexibilidad:</strong> El sistema acepta mayúsculas, minúsculas o combinaciones, y corrige automáticamente espacios extra o signos de puntuación.</p>
+                <p>• <strong>Verbos en Pasado:</strong> Todos los verbos principales requeridos en las secciones de Pasado Simple son <strong>regulares</strong> (terminan en -ed).</p>
+            </div>
+            
+            <label class="mono">NOMBRE DEL ALUMNO:</label>
+            <input type="text" id="studentName" placeholder="EJ. JOHN DOE" required>
+            
+            <label class="mono">MATRÍCULA:</label>
+            <input type="text" id="studentId" placeholder="EJ. FDA-2026-ENG" required>
+            
+            <button class="btn" onclick="startExam()">START EXAM ▶</button>
+        </div>
+
+        <div id="phase1" class="phase-screen">
+            <h2>PHASE 1: THE STUDIO</h2>
+            <div class="story-box">
+                <div class="grammar-tag">Grammar: Present Simple</div><br>
+                Es tu primer día en el estudio de diseño y debes presentarte indicando a qué te dedicas.
+                <br><br><strong>Traduce:</strong> <em>"Yo diseño vestidos rosas."</em>
+            </div>
+            <div class="wiki-vocab">
+                <strong>Verb:</strong> <span class="pos-verb">design</span><br>
+                <strong>Adjective:</strong> <span class="pos-adj">pink</span><br>
+                <strong>Noun:</strong> <span class="pos-noun">dresses</span>
+            </div>
+            <button class="btn btn-hint" onclick="useHint(1)">💡 GRAMMAR HINT</button>
+            <div id="hint1" class="hint-box">Subject + Verb + Adjective + Noun.<br><br><em>Example: I make blue shirts.</em></div>
+            <input type="text" id="ans1" placeholder="Type your answer in English...">
+            <button class="btn" onclick="evaluatePhase(1)">SUBMIT & CONTINUE ⏭</button>
+        </div>
+
+        <div id="phase2" class="phase-screen">
+            <h2>PHASE 2: THE RUNWAY</h2>
+            <div class="story-box">
+                <div class="grammar-tag">Grammar: Present Continuous</div><br>
+                Estás describiendo lo que lleva puesto la modelo estrella en este momento.
+                <br><br><strong>Traduce:</strong> <em>"Ella está usando una falda blanca."</em>
+            </div>
+            <div class="wiki-vocab">
+                <strong>Verb:</strong> <span class="pos-verb">wear</span> (add -ing)<br>
+                <strong>Article:</strong> <span class="pos-prep">a</span> (una)<br>
+                <strong>Adjective:</strong> <span class="pos-adj">white</span><br>
+                <strong>Noun:</strong> <span class="pos-noun">skirt</span>
+            </div>
+            <button class="btn btn-hint" onclick="useHint(2)">💡 GRAMMAR HINT</button>
+            <div id="hint2" class="hint-box">Subject + to be (is/are/am) + Verb(-ing) + Article + Adj + Noun.<br><br><em>Example: He is wearing a black hat.</em></div>
+            <input type="text" id="ans2" placeholder="Type your answer in English...">
+            <button class="btn" onclick="evaluatePhase(2)">SUBMIT & CONTINUE ⏭</button>
+        </div>
+
+        <div id="phase3" class="phase-screen">
+            <h2>PHASE 3: NEW COLLECTION</h2>
+            <div class="story-box">
+                <div class="grammar-tag">Grammar: Past Simple (Regular Verb)</div><br>
+                Le cuentas a tu equipo sobre la colección que hicieron ayer.
+                <br><br><strong>Traduce:</strong> <em>"Nosotros creamos zapatos dorados."</em>
+            </div>
+            <div class="wiki-vocab">
+                <strong>Verb (Regular):</strong> <span class="pos-verb">create</span> -> Past: <strong>created</strong><br>
+                <strong>Adjective:</strong> <span class="pos-adj">gold</span><br>
+                <strong>Noun:</strong> <span class="pos-noun">shoes</span>
+            </div>
+            <button class="btn btn-hint" onclick="useHint(3)">💡 GRAMMAR HINT</button>
+            <div id="hint3" class="hint-box">Subject + Verb in Past (-ed) + Adjective + Noun.<br><br><em>Example: We designed silver rings.</em></div>
+            <input type="text" id="ans3" placeholder="Type your answer in English...">
+            <button class="btn" onclick="evaluatePhase(3)">SUBMIT & CONTINUE ⏭</button>
+        </div>
+
+        <div id="phase4" class="phase-screen">
+            <h2>PHASE 4: FASHION WEEK</h2>
+            <div class="story-box">
+                <div class="grammar-tag">Grammar: Past Continuous</div><br>
+                Un reportero te pregunta qué estaba sucediendo cuando se apagaron las luces.
+                <br><br><strong>Traduce:</strong> <em>"El modelo estaba caminando en la pasarela."</em>
+            </div>
+            <div class="wiki-vocab">
+                <strong>Subject:</strong> <span class="pos-prep">the</span> <span class="pos-noun">model</span><br>
+                <strong>Verb:</strong> <span class="pos-verb">walk</span> (add -ing)<br>
+                <strong>Preposition & Noun:</strong> <span class="pos-prep">on the</span> <span class="pos-noun">runway</span>
+            </div>
+            <button class="btn btn-hint" onclick="useHint(4)">💡 GRAMMAR HINT</button>
+            <div id="hint4" class="hint-box">Subject + was/were + Verb(-ing) + Preposition + Object.<br><br><em>Example: The designer was working in the studio.</em></div>
+            <input type="text" id="ans4" placeholder="Type your answer in English...">
+            <button class="btn" onclick="evaluatePhase(4)">SUBMIT & CONTINUE ⏭</button>
+        </div>
+
+        <div id="phase5" class="phase-screen">
+            <h2>PHASE 5: AESTHETICS REVIEW</h2>
+            <div class="story-box">
+                <div class="grammar-tag">Grammar: Present Simple (Negative)</div><br>
+                Estás criticando el trabajo de otro equipo porque su ropa no combina bien.
+                <br><br><strong>Traduce:</strong> <em>"Ellos no combinan los colores."</em>
+            </div>
+            <div class="wiki-vocab">
+                <strong>Negative auxiliary:</strong> <span class="pos-verb">do not</span> (or don't)<br>
+                <strong>Verb:</strong> <span class="pos-verb">match</span><br>
+                <strong>Object:</strong> <span class="pos-prep">the</span> <span class="pos-noun">colors</span>
+            </div>
+            <button class="btn btn-hint" onclick="useHint(5)">💡 GRAMMAR HINT</button>
+            <div id="hint5" class="hint-box">Subject + do/does not + Verb (base form) + Object.<br><br><em>Example: She does not like the fabric.</em></div>
+            <input type="text" id="ans5" placeholder="Type your answer in English...">
+            <button class="btn" onclick="evaluatePhase(5)">SUBMIT & CONTINUE ⏭</button>
+        </div>
+
+        <div id="phase6" class="phase-screen">
+            <h2>PHASE 6: THE ATELIER</h2>
+            <div class="story-box">
+                <div class="grammar-tag">Grammar: Past Continuous (Negative)</div><br>
+                Aclaras un malentendido sobre lo que estabas haciendo ayer en el taller.
+                <br><br><strong>Traduce:</strong> <em>"Yo no estaba cosiendo la chaqueta."</em>
+            </div>
+            <div class="wiki-vocab">
+                <strong>Verb:</strong> <span class="pos-verb">sew</span> (add -ing)<br>
+                <strong>Object:</strong> <span class="pos-prep">the</span> <span class="pos-noun">jacket</span>
+            </div>
+            <button class="btn btn-hint" onclick="useHint(6)">💡 GRAMMAR HINT</button>
+            <div id="hint6" class="hint-box">Subject + was/were not + Verb(-ing) + Object.<br><br><em>Example: They were not cutting the silk.</em></div>
+            <input type="text" id="ans6" placeholder="Type your answer in English...">
+            <button class="btn" onclick="evaluatePhase(6)">SUBMIT & CONTINUE ⏭</button>
+        </div>
+
+        <div id="phase7" class="phase-screen">
+            <h2>PHASE 7: THE PORTFOLIO</h2>
+            <div class="story-box">
+                <div class="grammar-tag">Grammar: Future Simple (Will)</div><br>
+                El director de la academia te anima sobre tu proyecto final.
+                <br><br><strong>Traduce:</strong> <em>"Tú presentarás tu colección de moda."</em>
+            </div>
+            <div class="wiki-vocab">
+                <strong>Auxiliary:</strong> <span class="pos-verb">will</span><br>
+                <strong>Verb:</strong> <span class="pos-verb">present</span><br>
+                <strong>Pronoun (Possessive):</strong> <span class="pos-prep">your</span><br>
+                <strong>Noun phrase:</strong> <span class="pos-noun">fashion collection</span>
+            </div>
+            <button class="btn btn-hint" onclick="useHint(7)">💡 GRAMMAR HINT</button>
+            <div id="hint7" class="hint-box">Subject + will + Verb (base form) + Possessive + Noun.<br><br><em>Example: I will show my designs.</em></div>
+            <input type="text" id="ans7" placeholder="Type your answer in English...">
+            <button class="btn" onclick="evaluatePhase(7)">SUBMIT & CONTINUE ⏭</button>
+        </div>
+
+        <div id="phase8" class="phase-screen">
+            <h2>PHASE 8: CREATIVE PROCESS</h2>
+            <div class="story-box">
+                <div class="grammar-tag">Grammar: Present Continuous (Interrogative)</div><br>
+                Ves a un compañero experimentando con telas y le haces una pregunta sobre su estilo.
+                <br><br><strong>Traduce:</strong> <em>"¿Estás creando una nueva estética?"</em>
+            </div>
+            <div class="wiki-vocab">
+                <strong>Verb:</strong> <span class="pos-verb">create</span> -> creating<br>
+                <strong>Article & Adjective:</strong> <span class="pos-prep">a</span> <span class="pos-adj">new</span><br>
+                <strong>Noun:</strong> <span class="pos-noun">aesthetic</span>
+            </div>
+            <button class="btn btn-hint" onclick="useHint(8)">💡 GRAMMAR HINT</button>
+            <div id="hint8" class="hint-box">To be (Am/Is/Are) + Subject + Verb(-ing) + Object + ?<br><br><em>Example: Are they designing a dress?</em></div>
+            <input type="text" id="ans8" placeholder="Type your answer in English...">
+            <button class="btn" onclick="evaluatePhase(8)">SUBMIT & CONTINUE ⏭</button>
+        </div>
+
+        <div id="phase9" class="phase-screen">
+            <h2>PHASE 9: CAREER GOALS</h2>
+            <div class="story-box">
+                <div class="grammar-tag">Grammar: Future Continuous</div><br>
+                Estás visualizando el futuro de tu compañero, imaginando su marca de éxito.
+                <br><br><strong>Traduce:</strong> <em>"Él estará vendiendo ropa hermosa."</em>
+            </div>
+            <div class="wiki-vocab">
+                <strong>Auxiliaries:</strong> <span class="pos-verb">will be</span><br>
+                <strong>Verb:</strong> <span class="pos-verb">sell</span> (add -ing)<br>
+                <strong>Adjective:</strong> <span class="pos-adj">beautiful</span><br>
+                <strong>Noun:</strong> <span class="pos-noun">clothes</span>
+            </div>
+            <button class="btn btn-hint" onclick="useHint(9)">💡 GRAMMAR HINT</button>
+            <div id="hint9" class="hint-box">Subject + will be + Verb(-ing) + Adjective + Noun.<br><br><em>Example: She will be wearing gold shoes.</em></div>
+            <input type="text" id="ans9" placeholder="Type your answer in English...">
+            <button class="btn" onclick="evaluatePhase(9)">SUBMIT & CONTINUE ⏭</button>
+        </div>
+
+        <div id="phase10" class="phase-screen">
+            <h2>PHASE 10: BACKSTAGE</h2>
+            <div class="story-box">
+                <div class="grammar-tag">Grammar: Past Simple (Regular Verb)</div><br>
+                Reportas lo que hizo el equipo justo antes del show de pasarela.
+                <br><br><strong>Traduce:</strong> <em>"El diseñador terminó el vestido."</em>
+            </div>
+            <div class="wiki-vocab">
+                <strong>Subject:</strong> <span class="pos-prep">the</span> <span class="pos-noun">designer</span><br>
+                <strong>Verb (Regular):</strong> <span class="pos-verb">finish</span> -> Past: <strong>finished</strong><br>
+                <strong>Object:</strong> <span class="pos-prep">the</span> <span class="pos-noun">dress</span>
+            </div>
+            <button class="btn btn-hint" onclick="useHint(10)">💡 GRAMMAR HINT</button>
+            <div id="hint10" class="hint-box">Subject + Verb in Past (-ed) + Object.<br><br><em>Example: The model worked on the runway.</em></div>
+            <input type="text" id="ans10" placeholder="Type your answer in English...">
+            <button class="btn" onclick="evaluatePhase(10)">SUBMIT & CONTINUE ⏭</button>
+        </div>
+
+        <div id="phase-sig" class="phase-screen">
+            <h2>FINAL PHASE: OWNERSHIP</h2>
+            <div class="story-box">
+                <div class="grammar-tag">Grammar: Possessive 's</div><br>
+                Para validar tu examen, debes reclamar la propiedad de este portafolio usando el posesivo en inglés.
+                <br><br><strong>Traduce:</strong> <em>"Este es el portafolio del estudiante."</em>
+            </div>
+            <div class="wiki-vocab">
+                <strong>Expression:</strong> This is...<br>
+                <strong>Article:</strong> <span class="pos-prep">the</span><br>
+                <strong>Nouns:</strong> <span class="pos-noun">student</span> / <span class="pos-noun">portfolio</span>
+            </div>
+            <button class="btn btn-hint" onclick="useHint(11)">💡 POSSESSIVE HINT</button>
+            <div id="hint11" class="hint-box">This is the + Owner + 's + Object owned.<br><br><em>Example: This is the designer's sketch.</em> (Note: apostrophes are optional in this test).</div>
+            
+            <input type="text" id="ans-sig" placeholder="Type your answer in English...">
+            
+            <label class="mono" style="color: var(--primary-pink);">STUDENT SIGNATURE (DRAW WITH MOUSE OR TOUCH):</label><br>
+            <canvas id="signatureCanvas" class="signature-pad" height="200"></canvas><br>
+            <button class="btn" style="width: auto; padding: 8px 15px; font-size: 0.9rem;" onclick="clearCanvas()">CLEAR SIGNATURE 🗑</button><br><br>
+
+            <button class="btn" onclick="evaluatePhase('sig')">FINISH & GET CERTIFICATE 🏁</button>
+        </div>
+
+        <div id="results">
+            <div class="certificate">
+                <div class="plaque-header">
+                    <h1 style="font-size: 2.2rem; margin-bottom: 5px;">FASHION & DESIGN ACADEMY</h1>
+                    <h3 style="letter-spacing: 2px; color: var(--accent-gold);">ENGLISH LANGUAGE CERTIFICATE</h3>
+                </div>
+                
+                <div style="text-align: left; margin: 30px 0; font-size: 1.2rem; line-height: 1.8;">
+                    <p>It is hereby certified on <strong><span id="r-date">[FECHA]</span></strong> that the student:</p>
+                    <h2 id="r-name" style="font-size: 2rem; margin: 15px 0; border-bottom: 2px solid var(--primary-pink); display: inline-block; padding-right: 50px;">JOHN DOE</h2>
+                    <p>with institutional ID <strong><span id="r-id" class="mono">FDA-X</span></strong>, has completed an intensive fashion-focused English course.</p>
+                </div>
+
+                <div style="background: var(--bg-color); color: var(--text-color); padding: 20px; text-align: center; margin-bottom: 40px; border: 4px solid var(--primary-pink);">
+                    <p style="font-size: 1rem; text-transform: uppercase; font-weight: bold; margin-bottom: 10px; color: var(--primary-pink);">OFFICIAL EVALUATION RESULT:</p>
+                    <h1 style="font-size: 3rem; color: var(--accent-gold);">LEVEL <span id="r-level">A1</span></h1>
+                    <h3 style="color: var(--text-color);">FINAL SCORE: <span id="r-score-percent">0%</span></h3>
+                </div>
+
+                <div style="margin-top: 50px; display: flex; justify-content: space-between; align-items: flex-end;">
+                    <div style="text-align: center; width: 30%;">
+                        <img class="r-signature" src="" style="max-width: 100%; max-height: 80px; border-bottom: 1px solid var(--primary-pink);" alt="Firma Alumno">
+                        <p class="mono" style="font-size: 0.85rem; margin-top: 5px; text-transform: uppercase;"><span id="r-name-sig">Student</span></p>
+                        <p class="mono" style="font-size: 0.75rem; color: #777;">Examinee</p>
+                    </div>
+                    <div style="text-align: center; width: 30%;">
+                        <div style="height: 80px; border-bottom: 1px solid var(--primary-pink); display: flex; align-items: flex-end; justify-content: center;">
+                            <span style="font-family: 'Courier New', monospace; font-style: italic; font-weight: bold; color: var(--text-color);">Fashion Academy</span>
+                        </div>
+                        <p class="mono" style="font-size: 0.85rem; margin-top: 5px; text-transform: uppercase;">Academy Board</p>
+                        <p class="mono" style="font-size: 0.75rem; color: #777;">Academic Director</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="print-actions">
+                <button class="btn btn-no-print" style="background:var(--primary-pink); color:#fff;" onclick="window.print()">🖨 PRINT CERTIFICATE</button>
+            </div>
+
+            <div class="audit-section">
+                <h3 style="color: var(--primary-pink);">TECHNICAL AUDIT (VIEW ONLY)</h3>
+                <p style="margin-bottom: 15px;">Summary of evaluated competencies.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Topic Evaluated</th>
+                            <th>Your Answer</th>
+                            <th>Expected Answer</th>
+                        </tr>
+                    </thead>
+                    <tbody id="audit-body">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="feedback-modal">
+        <div class="modal-content">
+            <h2 id="modal-title" style="font-size: 2rem;">RESULT</h2>
+            <p id="modal-body" class="story-box" style="margin-top: 15px; margin-bottom: 0;">Mensaje estructurado.</p>
+            <button class="btn" style="margin-top:20px;" onclick="nextStepLogic()">UNDERSTOOD ⏭</button>
+        </div>
+    </div>
+
+    <script>
+        /* =========================================================
+           DICCIONARIOS Y CONSTANTES LOGICAS
+           Las respuestas están estandarizadas a minúsculas y sin
+           ningún signo de puntuación (apóstrofes incluidos).
+           ========================================================= */
+        const EXAM_DATA = {
+            1: {
+                ans: ["i design pink dresses"],
+                topic: "Present Simple (Affirmative)",
+                feedback: "Correct! The verb 'design' stays in base form for the pronoun 'I'."
+            },
+            2: {
+                ans: ["she is wearing a white skirt"],
+                topic: "Present Continuous (Affirmative)",
+                feedback: "Correct! We use 'is' with 'she', and add '-ing' to the verb 'wear'."
+            },
+            3: {
+                ans: ["we created gold shoes"],
+                topic: "Past Simple (Regular Verb)",
+                feedback: "Correct! The past of 'create' is formed by adding '-d' -> 'created'. Adjectives go before the noun."
+            },
+            4: {
+                ans: ["the model was walking on the runway"],
+                topic: "Past Continuous",
+                feedback: "Correct! We use 'was' for singular subjects, plus verb '-ing', and the preposition 'on'."
+            },
+            5: {
+                ans: ["they do not match the colors", "they dont match the colors"],
+                topic: "Present Simple (Negative)",
+                feedback: "Correct! The negative auxiliary for 'they' is 'do not' (don't)."
+            },
+            6: {
+                ans: ["i was not sewing the jacket", "i wasnt sewing the jacket"],
+                topic: "Past Continuous (Negative)",
+                feedback: "Correct! 'was not' (wasn't) is used to form the negative in past continuous for 'I'."
+            },
+            7: {
+                ans: ["you will present your fashion collection"],
+                topic: "Future Simple",
+                feedback: "Correct! We use 'will' + base verb for the future."
+            },
+            8: {
+                ans: ["are you creating a new aesthetic"],
+                topic: "Present Continuous (Interrogative)",
+                feedback: "Correct! To make a question, swap the subject 'you' and the auxiliary 'are'."
+            },
+            9: {
+                ans: ["he will be selling beautiful clothes"],
+                topic: "Future Continuous",
+                feedback: "Correct! 'will be' + verb-ing describes an action in progress in the future."
+            },
+            10: {
+                ans: ["the designer finished the dress"],
+                topic: "Past Simple (Regular Verb)",
+                feedback: "Correct! The past tense of the regular verb 'finish' is 'finished'."
+            }
+        };
+
+        /* =========================================================
+           VARIABLES GLOBALES DE ESTADO
+           ========================================================= */
+        let stepOrder = []; 
+        let currentStepIndex = 0;
+        let scorePercent = 0;
+        let userAnswersRecord = {};
+        
+        let timeRemaining = 3600; // 60 min
+        let timerInterval;
+        let studentData = { name: "", id: "" };
+
+        /* =========================================================
+           MÉTODOS AUXILIARES Y NORMALIZACIÓN ROBUSTA (FLEXIBILIDAD MAXIMA)
+           ========================================================= */
+        function formatTime(seconds) {
+            let m = Math.floor(seconds / 60);
+            let s = seconds % 60;
+            return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+        }
+
+        // Limpia a fondo: Pone en minúsculas, quita TODO signo de puntuación, 
+        // apóstrofes y reduce múltiples espacios a uno solo.
+        function cleanEnglishString(str) {
+            if (!str) return "";
+            let cleaned = str.toLowerCase();
+            
+            // Reemplazar apóstrofes, acentos y comillas por nada (así don't y dont son iguales)
+            cleaned = cleaned.replace(/['’´`"”"']/g, "");
+            
+            // Eliminar cualquier otro signo de puntuación
+            cleaned = cleaned.replace(/[.,\/#!$%\^&\*;:{}=\-_~()¿?¡!]/g, "");
+            
+            // Quitar espacios múltiples y espacios al inicio/final
+            cleaned = cleaned.replace(/\s+/g, ' ').trim();
+            
+            return cleaned;
+        }
+
+        /* =========================================================
+           CONTROLADOR DEL DASHBOARD
+           ========================================================= */
+        function updateDashboard() {
+            document.getElementById('dash-score').innerText = scorePercent + "%";
+            
+            let totalSteps = 11; // 10 + Firma
+            let progress = (currentStepIndex / totalSteps) * 100;
+            document.getElementById('dash-progress').style.width = progress + '%';
+        }
+
+        function useHint(phaseNum) {
+            document.getElementById('hint' + phaseNum).style.display = 'block';
+        }
+
+        /* =========================================================
+           MOTOR DEL EXAMEN
+           ========================================================= */
+        function startExam() {
+            const nameVal = document.getElementById('studentName').value.trim();
+            const idVal = document.getElementById('studentId').value.trim();
+
+            if (!nameVal || !idVal) {
+                alert("Please enter your Name and ID.");
+                return;
+            }
+
+            studentData.name = nameVal;
+            studentData.id = idVal;
+
+            stepOrder = [];
+            for (let j = 1; j <= 10; j++) stepOrder.push('phase' + j);
+            stepOrder.push('phase-sig');
+
+            document.getElementById('dashboard').style.display = 'block';
+            
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                document.getElementById('dash-time').innerText = formatTime(timeRemaining);
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    alert("TIME IS UP!");
+                    finishExam();
+                }
+            }, 1000);
+
+            showScreen(stepOrder[0]);
+        }
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.phase-screen').forEach(el => el.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            updateDashboard();
+        }
+
+        function evaluatePhase(phaseId) {
+            let isCorrect = false;
+            let titleText = "";
+            let bodyText = "";
+
+            if (typeof phaseId === 'number') {
+                let inputElement = document.getElementById('ans' + phaseId);
+                let rawInput = inputElement.value;
+                let cleanInput = cleanEnglishString(rawInput);
+                let possibleAnswers = EXAM_DATA[phaseId].ans;
+
+                userAnswersRecord[phaseId] = rawInput; // Guardar tal cual escribió el usuario para auditoría
+
+                if (possibleAnswers.includes(cleanInput)) {
+                    isCorrect = true;
+                    scorePercent += 10;
+                    titleText = "CORRECT!";
+                    bodyText = EXAM_DATA[phaseId].feedback;
+                } else {
+                    isCorrect = false;
+                    document.getElementById('dashboard').style.background = 'var(--error-color)';
+                    setTimeout(() => { document.getElementById('dashboard').style.background = 'var(--surface-color)'; }, 500);
+                    
+                    titleText = "INCORRECT!";
+                    bodyText = `Expected answer: ${possibleAnswers[0].toUpperCase()}.\n\nExplanation: ${EXAM_DATA[phaseId].feedback}`;
+                }
+            } 
+            else if (phaseId === 'sig') {
+                let inputElement = document.getElementById('ans-sig');
+                let rawInput = inputElement.value;
+                let cleanInput = cleanEnglishString(rawInput);
+                
+                userAnswersRecord['sig'] = rawInput;
+
+                let expectedAns = "this is the students portfolio"; // Recuerda que cleanEnglishString le quita el apóstrofe
+                
+                if (cleanInput === expectedAns) {
+                    isCorrect = true;
+                    if (scorePercent < 100) {
+                        scorePercent += 10; // Bonus de recuperación
+                        bodyText = "You recovered 10 points thanks to your grammar mastery!";
+                    } else {
+                        bodyText = "Possessive applied correctly.";
+                    }
+                    titleText = "VERY GOOD!";
+                } else {
+                    isCorrect = false;
+                    titleText = "NOT QUITE...";
+                    bodyText = `The expected answer was: This is the student's portfolio.\nNo points deducted.`;
+                }
+            }
+
+            updateDashboard();
+            
+            const modal = document.getElementById('feedback-modal');
+            const titleEl = document.getElementById('modal-title');
+            
+            titleEl.innerText = titleText;
+            titleEl.style.color = isCorrect ? "var(--accent-gold)" : "#ffffff";
+            document.getElementById('modal-body').innerText = bodyText;
+            
+            modal.style.display = 'flex';
+        }
+
+        function nextStepLogic() {
+            document.getElementById('feedback-modal').style.display = 'none';
+            currentStepIndex++;
+            
+            if (currentStepIndex < stepOrder.length) {
+                showScreen(stepOrder[currentStepIndex]);
+            } else {
+                finishExam();
+            }
+        }
+
+        function finishExam() {
+            clearInterval(timerInterval);
+            
+            document.getElementById('dashboard').style.display = 'none';
+            document.querySelectorAll('.phase-screen').forEach(el => el.classList.remove('active'));
+            document.getElementById('results').style.display = 'block';
+
+            // Rellenar Constancia
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            
+            document.getElementById('r-date').innerText = dateStr;
+            document.getElementById('r-name').innerText = studentData.name.toUpperCase();
+            document.getElementById('r-name-sig').innerText = studentData.name;
+            document.getElementById('r-id').innerText = studentData.id.toUpperCase();
+            
+            let finalLevel = "A1 INCOMPLETE";
+            if(scorePercent > 50) finalLevel = "A1 PASSED";
+            if(scorePercent === 100) finalLevel = "A1 PASSED WITH HONORS";
+            
+            document.getElementById('r-level').innerText = finalLevel;
+            document.getElementById('r-score-percent').innerText = scorePercent + "%";
+            
+            let canvasSignatureData = canvas.toDataURL();
+            document.querySelectorAll('.r-signature').forEach(img => img.src = canvasSignatureData);
+
+            // Generar Auditoría Visual
+            const tbody = document.getElementById('audit-body');
+            tbody.innerHTML = "";
+            for (let i = 1; i <= 10; i++) {
+                let tr = document.createElement('tr');
+                let tdFase = document.createElement('td'); tdFase.innerText = "Phase " + i;
+                let tdTopic = document.createElement('td'); tdTopic.innerText = EXAM_DATA[i].topic;
+                let tdUser = document.createElement('td'); tdUser.innerText = userAnswersRecord[i] || "(No answer)";
+                
+                // Mostramos el expected principal 
+                let expectedStr = EXAM_DATA[i].ans[0];
+                if(i === 5) expectedStr = "they do not match the colors";
+                if(i === 6) expectedStr = "i was not sewing the jacket";
+                
+                let tdExpected = document.createElement('td'); tdExpected.innerText = expectedStr;
+                
+                tr.appendChild(tdFase);
+                tr.appendChild(tdTopic);
+                tr.appendChild(tdUser);
+                tr.appendChild(tdExpected);
+                tbody.appendChild(tr);
+            }
+            
+            // Fila de Fase Firma
+            let trSig = document.createElement('tr');
+            let tdSigF = document.createElement('td'); tdSigF.innerText = "Final Phase";
+            let tdSigT = document.createElement('td'); tdSigT.innerText = "Possessive 's";
+            let tdSigU = document.createElement('td'); tdSigU.innerText = userAnswersRecord['sig'] || "(No answer)";
+            let tdSigE = document.createElement('td'); tdSigE.innerText = `this is the student's portfolio`;
+            trSig.appendChild(tdSigF);
+            trSig.appendChild(tdSigT);
+            trSig.appendChild(tdSigU);
+            trSig.appendChild(tdSigE);
+            tbody.appendChild(trSig);
+        }
+
+        /* =========================================================
+           LÓGICA DEL LIENZO DE FIRMA (CANVAS)
+           ========================================================= */
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+
+        function adjustCanvasWidth() {
+            canvas.width = canvas.parentElement.clientWidth;
+            ctx.lineWidth = 3;
+            ctx.lineCap = 'round';
+            ctx.strokeStyle = '#e81e63'; // Trazos en color pink
+        }
+        window.addEventListener('resize', adjustCanvasWidth);
+        setTimeout(adjustCanvasWidth, 200);
+
+        function getCoordinates(e) {
+            let rect = canvas.getBoundingClientRect();
+            let clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            let clientY = e.clientY || (e.touches && e.touches[0].clientY);
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function startPosition(e) {
+            isDrawing = true;
+            ctx.beginPath();
+            let coords = getCoordinates(e);
+            ctx.moveTo(coords.x, coords.y);
+        }
+
+        function drawMotion(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+            let coords = getCoordinates(e);
+            ctx.lineTo(coords.x, coords.y);
+            ctx.stroke();
+        }
+
+        function endPosition() { isDrawing = false; }
+
+        canvas.addEventListener('mousedown', startPosition);
+        canvas.addEventListener('mouseup', endPosition);
+        canvas.addEventListener('mousemove', drawMotion);
+        canvas.addEventListener('touchstart', (e) => { startPosition(e); }, {passive: false});
+        canvas.addEventListener('touchend', endPosition);
+        canvas.addEventListener('touchmove', (e) => { drawMotion(e); }, {passive: false});
+
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            adjustCanvasWidth();
+        }
+    </script>
+</body>
+</html>
