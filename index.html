@@ -114,6 +114,10 @@
             position: relative;
         }
 
+        .story-box p {
+            margin-bottom: 10px;
+        }
+
         .story-box::after {
             content: "✨";
             position: absolute;
@@ -309,6 +313,7 @@
 
     <div class="container">
         
+        <!-- PANTALLA INICIAL -->
         <div id="landing" class="phase-screen active">
             <h1 style="text-align: center; font-size: 2.8rem; margin-bottom: 10px;">Fashion Career</h1>
             <h3 style="text-align: center; margin-bottom: 30px; font-family: 'Poppins', sans-serif; color: var(--gold);">ENGLISH ASSESSMENT</h3>
@@ -327,22 +332,26 @@
             <button onclick="startExam()">INICIAR CARRERA ✨</button>
         </div>
 
+        <!-- FASE 1 -->
         <div id="phase1" class="phase-screen">
             <h2>Capítulo 1: La Admisión</h2>
             <div class="story-box">
-                <strong>Situación:</strong> Estás en tu entrevista de admisión para la academia. Debes expresar un hecho general sobre tu pasión por la industria. 
+                <p><strong>Situación:</strong> Estás en tu entrevista de admisión para la academia. Debes expresar un hecho general sobre tu pasión por la industria.</p>
+                <p><strong>Situation:</strong> You are in your admission interview for the academy. You must express a general fact about your passion for the industry.</p>
             </div>
             <button class="btn-hint" onclick="useHint(1)">💡 Ver Fórmula Gramatical</button>
-            <div id="hint1" class="hint-box">Subject (I/You/We/They) + Verb (Base form) + Object</div>
+            <div id="hint1" class="hint-box">Subject (I) + Verb (Base form) + Object</div>
             
             <div class="options-container" id="options1"></div>
             <button onclick="evaluatePhase(1)">ENVIAR DISEÑO 🪡</button>
         </div>
 
+        <!-- FASE 2 -->
         <div id="phase2" class="phase-screen">
             <h2>Capítulo 2: El Primer Boceto</h2>
             <div class="story-box">
-                <strong>Situación:</strong> Estás en tu primera clase. El profesor te pregunta qué estás haciendo en este preciso momento en tu cuaderno.
+                <p><strong>Situación:</strong> Estás en tu primera clase. El profesor te pregunta qué estás haciendo en este preciso momento en tu cuaderno.</p>
+                <p><strong>Situation:</strong> You are in your first class. The professor asks what you are doing right now in your notebook.</p>
             </div>
             <button class="btn-hint" onclick="useHint(2)">💡 Ver Fórmula Gramatical</button>
             <div id="hint2" class="hint-box">Subject (I) + am + Verb(-ing) + Object</div>
@@ -351,22 +360,26 @@
             <button onclick="evaluatePhase(2)">ENVIAR DISEÑO 🪡</button>
         </div>
 
+        <!-- FASE 3 -->
         <div id="phase3" class="phase-screen">
             <h2>Capítulo 3: Taller de Costura</h2>
             <div class="story-box">
-                <strong>Situación:</strong> Estás mostrando a tus amigas el vestido que terminaste de coser la semana pasada.
+                <p><strong>Situación:</strong> Estás mostrando a tus amigas el vestido que terminaste de coser la semana pasada.</p>
+                <p><strong>Situation:</strong> You are showing your friends the dress you finished sewing last week.</p>
             </div>
             <button class="btn-hint" onclick="useHint(3)">💡 Ver Fórmula Gramatical</button>
-            <div id="hint3" class="hint-box">Subject + Verb(-ed) [Past Simple] + Object</div>
+            <div id="hint3" class="hint-box">Subject (I) + Verb(-ed) [Past Simple] + Object</div>
             
             <div class="options-container" id="options3"></div>
             <button onclick="evaluatePhase(3)">ENVIAR DISEÑO 🪡</button>
         </div>
 
+        <!-- FASE 4 -->
         <div id="phase4" class="phase-screen">
             <h2>Capítulo 4: Pasarela Estudiantil</h2>
             <div class="story-box">
-                <strong>Situación:</strong> Hubo un apagón en la pasarela. Te preguntan qué estaba sucediendo exactamente cuando se fue la luz.
+                <p><strong>Situación:</strong> Hubo un apagón en la pasarela. Te preguntan qué estaba sucediendo exactamente cuando se fue la luz.</p>
+                <p><strong>Situation:</strong> There was a blackout on the runway. They ask you what was happening exactly when the lights went out.</p>
             </div>
             <button class="btn-hint" onclick="useHint(4)">💡 Ver Fórmula Gramatical</button>
             <div id="hint4" class="hint-box">Subject (The models) + were + Verb(-ing) + Object</div>
@@ -375,58 +388,68 @@
             <button onclick="evaluatePhase(4)">ENVIAR DISEÑO 🪡</button>
         </div>
 
+        <!-- FASE 5 -->
         <div id="phase5" class="phase-screen">
             <h2>Capítulo 5: Proyecto de Graduación</h2>
             <div class="story-box">
-                <strong>Situación:</strong> Estás haciendo una promesa firme sobre la presentación de tu colección final el próximo mes.
+                <p><strong>Situación:</strong> Estás haciendo una promesa firme sobre la presentación de tu colección final el próximo mes.</p>
+                <p><strong>Situation:</strong> You are making a firm promise about the presentation of your final collection next month.</p>
             </div>
             <button class="btn-hint" onclick="useHint(5)">💡 Ver Fórmula Gramatical</button>
-            <div id="hint5" class="hint-box">Subject + will + Verb (Base form) + Object</div>
+            <div id="hint5" class="hint-box">Subject (I) + will + Verb (Base form) + Object</div>
             
             <div class="options-container" id="options5"></div>
             <button onclick="evaluatePhase(5)">ENVIAR DISEÑO 🪡</button>
         </div>
 
+        <!-- FASE 6 -->
         <div id="phase6" class="phase-screen">
             <h2>Capítulo 6: Tu Propio Negocio</h2>
             <div class="story-box">
-                <strong>Situación:</strong> Abriste tu boutique. Quieres aclarar a un cliente exigente que tú NO diseñas ropa aburrida.
+                <p><strong>Situación:</strong> Abres tu propia boutique. Le cuentas a un cliente sobre los materiales de alta calidad que tú y tu equipo siempre utilizan.</p>
+                <p><strong>Situation:</strong> You open your own boutique. You tell a client about the high-quality materials you and your team always use.</p>
             </div>
             <button class="btn-hint" onclick="useHint(6)">💡 Ver Fórmula Gramatical</button>
-            <div id="hint6" class="hint-box">Subject (I) + do not + Verb (Base form) + Object</div>
+            <div id="hint6" class="hint-box">Subject (We) + Verb (Base form) + Object</div>
             
             <div class="options-container" id="options6"></div>
             <button onclick="evaluatePhase(6)">ENVIAR DISEÑO 🪡</button>
         </div>
 
+        <!-- FASE 7 -->
         <div id="phase7" class="phase-screen">
             <h2>Capítulo 7: La Crítica</h2>
             <div class="story-box">
-                <strong>Situación:</strong> Estás cuestionando a tu proveedor sobre si ellos estaban mezclando sedas baratas ayer.
+                <p><strong>Situación:</strong> Los críticos elogiaron un momento específico de tu show. Explicas qué prenda estaba modelando la modelo principal cuando todos la vieron.</p>
+                <p><strong>Situation:</strong> The critics praised a specific moment of your show. You explain what garment the main model was modeling when everyone saw her.</p>
             </div>
             <button class="btn-hint" onclick="useHint(7)">💡 Ver Fórmula Gramatical</button>
-            <div id="hint7" class="hint-box">Were + Subject (they) + Verb(-ing) + Object + ?</div>
+            <div id="hint7" class="hint-box">Subject (She) + was + Verb(-ing) + Object</div>
             
             <div class="options-container" id="options7"></div>
             <button onclick="evaluatePhase(7)">ENVIAR DISEÑO 🪡</button>
         </div>
 
+        <!-- FASE 8 -->
         <div id="phase8" class="phase-screen">
             <h2>Capítulo 8: Expansión Internacional</h2>
             <div class="story-box">
-                <strong>Situación:</strong> Un inversionista te pregunta por qué una actriz famosa no usó tu vestido en la gala pasada. Debes negar en tiempo pasado.
+                <p><strong>Situación:</strong> Lograste un hito internacional. Le cuentas a tu equipo con orgullo que una actriz famosa compró tu vestido para la gala de anoche.</p>
+                <p><strong>Situation:</strong> You achieved an international milestone. You proudly tell your team that a famous actress purchased your dress for last night's gala.</p>
             </div>
             <button class="btn-hint" onclick="useHint(8)">💡 Ver Fórmula Gramatical</button>
-            <div id="hint8" class="hint-box">Subject (She) + did not + Verb (Base form) + Object</div>
+            <div id="hint8" class="hint-box">Subject (The actress) + Verb(-ed) [Past Simple] + Object</div>
             
             <div class="options-container" id="options8"></div>
             <button onclick="evaluatePhase(8)">ENVIAR DISEÑO 🪡</button>
         </div>
 
+        <!-- FASE 9 -->
         <div id="phase9" class="phase-screen">
             <h2>Capítulo 9: Semana de la Moda</h2>
             <div class="story-box">
-                <strong>Situación:</strong> Entrevista para la revista Vogue. El reportero te pregunta qué estarás haciendo mañana a esta misma hora en París.
+                <p><strong>Situación:</strong> Tienes una entrevista para la revista Vogue. El reportero te pregunta qué estarás haciendo mañana a esta misma hora en París.</p>
+                <p><strong>Situation:</strong> You have an interview for Vogue magazine. The reporter asks you what you will be doing tomorrow at this exact time in Paris.</p>
             </div>
             <button class="btn-hint" onclick="useHint(9)">💡 Ver Fórmula Gramatical</button>
             <div id="hint9" class="hint-box">Subject (I) + will be + Verb(-ing) + Object</div>
@@ -435,10 +458,12 @@
             <button onclick="evaluatePhase(9)">ENVIAR DISEÑO 🪡</button>
         </div>
 
+        <!-- FASE 10 -->
         <div id="phase10" class="phase-screen">
             <h2>Capítulo 10: Diseñadora Internacional</h2>
             <div class="story-box">
-                <strong>Situación:</strong> Estás en el backstage. ¿Qué están haciendo los críticos de moda en la audiencia en este preciso momento?
+                <p><strong>Situación:</strong> Estás en el backstage. Observas a los críticos de moda en la audiencia. ¿Qué están haciendo en este preciso momento?</p>
+                <p><strong>Situation:</strong> You are backstage. You observe the fashion critics in the audience. What are they doing right now?</p>
             </div>
             <button class="btn-hint" onclick="useHint(10)">💡 Ver Fórmula Gramatical</button>
             <div id="hint10" class="hint-box">Subject (They) + are + Verb(-ing) + Object</div>
@@ -447,17 +472,20 @@
             <button onclick="evaluatePhase(10)">ENVIAR DISEÑO 🪡</button>
         </div>
 
+        <!-- FASE FIRMA -->
         <div id="phase-sig" class="phase-screen">
             <h2 style="text-align: center;">Firma tu Colección</h2>
             <div class="story-box" style="text-align: center;">
-                Has completado tu recorrido por la industria. Firma tu portafolio para recibir la reseña final de los críticos.
+                Has completado tu recorrido por la industria. Firma tu portafolio para recibir la reseña final de los críticos.<br><br>
+                You have completed your journey through the industry. Sign your portfolio to receive the final review from the critics.
             </div>
             <canvas id="signatureCanvas" class="signature-pad" height="200"></canvas><br>
-            <button class="btn-hint" style="width: 100%; border-style: solid;" onclick="clearCanvas()">BORRAR FIRMA 🗑</button><br>
+            <button class="btn-hint" style="width: 100%; border-style: solid;" onclick="clearCanvas()">BORRAR FIRMA / CLEAR SIGNATURE 🗑</button><br>
 
             <button onclick="finishExam()">OBTENER RESEÑA EXCLUSIVA 🏆</button>
         </div>
 
+        <!-- PANTALLA DE RESULTADOS -->
         <div id="results" class="phase-screen" style="padding: 0; background: transparent; border: none; box-shadow: none;">
             <div class="certificate">
                 <div class="magazine-header">
@@ -489,6 +517,7 @@
 
     </div>
 
+    <!-- MODAL -->
     <div id="feedback-modal">
         <div class="modal-content">
             <h2 id="modal-title" style="font-size: 2.5rem; margin-bottom: 10px;">TITULO</h2>
@@ -501,7 +530,7 @@
 
     <script>
         /* =========================================================
-           BASE DE DATOS DEL EXAMEN (10 Preguntas Narrativas)
+           BASE DE DATOS DEL EXAMEN (10 Preguntas Narrativas Afirmativas)
            ========================================================= */
         const EXAM_DATA = {
             1: {
@@ -512,7 +541,7 @@
                 ],
                 en_conclusion: "The director smiles and accepts you into the academy!",
                 es_conclusion: "¡El director sonríe y te acepta en la academia!",
-                feedback: "Presente Simple: Para el pronombre 'I', el verbo no lleva 's'."
+                feedback: "Presente Simple Afirmativo: Para el pronombre 'I', el verbo no lleva 's'."
             },
             2: {
                 options: [
@@ -522,7 +551,7 @@
                 ],
                 en_conclusion: "Your professor loves your first pink sketch.",
                 es_conclusion: "Tu profesor adora tu primer boceto rosa.",
-                feedback: "Presente Continuo (acciones sucediendo ahora): Verbo 'to be' (am) + Verbo principal con '-ing'."
+                feedback: "Presente Continuo Afirmativo (acciones sucediendo ahora): Verbo 'to be' (am) + Verbo principal con '-ing'."
             },
             3: {
                 options: [
@@ -532,7 +561,7 @@
                 ],
                 en_conclusion: "Your friends are amazed by your sewing skills.",
                 es_conclusion: "Tus amigas están asombradas por tus habilidades de costura.",
-                feedback: "Pasado Simple: Verbo regular termina en '-ed' (created)."
+                feedback: "Pasado Simple Afirmativo: Verbo regular termina en '-ed' (created)."
             },
             4: {
                 options: [
@@ -542,7 +571,7 @@
                 ],
                 en_conclusion: "Despite the blackout, the show was a success.",
                 es_conclusion: "A pesar del apagón, el show fue un éxito.",
-                feedback: "Pasado Continuo: 'models' es plural (they), por lo que usamos 'were' + verbo con '-ing'."
+                feedback: "Pasado Continuo Afirmativo: 'models' es plural (they), por lo que usamos 'were' + verbo con '-ing'."
             },
             5: {
                 options: [
@@ -552,37 +581,37 @@
                 ],
                 en_conclusion: "You graduate with top honors!",
                 es_conclusion: "¡Te gradúas con los máximos honores!",
-                feedback: "Futuro Simple: Después del auxiliar 'will', el verbo siempre va en su forma base."
+                feedback: "Futuro Simple Afirmativo: Después del auxiliar 'will', el verbo siempre va en su forma base."
             },
             6: {
                 options: [
-                    { text: "I do not design boring clothes.", isCorrect: true },
-                    { text: "I does not design boring clothes.", isCorrect: false },
-                    { text: "I not design boring clothes.", isCorrect: false }
+                    { text: "We uses high-quality fabrics.", isCorrect: false },
+                    { text: "We use high-quality fabrics.", isCorrect: true },
+                    { text: "We using high-quality fabrics.", isCorrect: false }
                 ],
-                en_conclusion: "The client respects your artistic vision.",
-                es_conclusion: "El cliente respeta tu visión artística.",
-                feedback: "Presente Simple Negativo: Para 'I', el auxiliar correcto es 'do not' (don't)."
+                en_conclusion: "The client admires your professional standards.",
+                es_conclusion: "El cliente admira tus estándares profesionales.",
+                feedback: "Presente Simple Afirmativo: Para 'We', el verbo va en su forma base, sin agregarle 's'."
             },
             7: {
                 options: [
-                    { text: "Was they mixing cheap silks?", isCorrect: false },
-                    { text: "Were they mixing cheap silks?", isCorrect: true },
-                    { text: "Did they mixing cheap silks?", isCorrect: false }
+                    { text: "She were wearing a silk gown.", isCorrect: false },
+                    { text: "She was wearing a silk gown.", isCorrect: true },
+                    { text: "She was wear a silk gown.", isCorrect: false }
                 ],
-                en_conclusion: "You protect the quality of your brand.",
-                es_conclusion: "Proteges la calidad de tu marca.",
-                feedback: "Pasado Continuo Interrogativo: Para 'they', empezamos la pregunta con 'Were' + sujeto + verbo(-ing)."
+                en_conclusion: "The critics loved that specific design.",
+                es_conclusion: "Los críticos amaron ese diseño en específico.",
+                feedback: "Pasado Continuo Afirmativo: Para la tercera persona singular (She), usamos 'was' + verbo principal con '-ing'."
             },
             8: {
                 options: [
-                    { text: "She did not wore my dress.", isCorrect: false },
-                    { text: "She does not wear my dress.", isCorrect: false },
-                    { text: "She did not wear my dress.", isCorrect: true }
+                    { text: "The actress purchased my dress.", isCorrect: true },
+                    { text: "The actress purchase my dress.", isCorrect: false },
+                    { text: "The actress was purchased my dress.", isCorrect: false }
                 ],
-                en_conclusion: "The investor understands it was a scheduling issue.",
-                es_conclusion: "El inversionista entiende que fue un problema de agenda.",
-                feedback: "Pasado Simple Negativo: 'did not' + verbo en forma base (wear). El auxiliar ya indica el pasado."
+                en_conclusion: "Your team celebrates this huge international success.",
+                es_conclusion: "Tu equipo celebra este enorme éxito internacional.",
+                feedback: "Pasado Simple Afirmativo: El verbo regular toma la terminación '-ed' (purchased) para indicar una acción concluida en el pasado."
             },
             9: {
                 options: [
@@ -592,7 +621,7 @@
                 ],
                 en_conclusion: "Vogue magazine features your ambitious expansion plan.",
                 es_conclusion: "La revista Vogue destaca tu ambicioso plan de expansión.",
-                feedback: "Futuro Continuo: 'will be' + verbo principal con '-ing'."
+                feedback: "Futuro Continuo Afirmativo: 'will be' + verbo principal con '-ing' indica una acción que estará en progreso en el futuro."
             },
             10: {
                 options: [
@@ -602,7 +631,7 @@
                 ],
                 en_conclusion: "You are now a globally recognized fashion icon!",
                 es_conclusion: "¡Ahora eres un ícono de la moda reconocido mundialmente!",
-                feedback: "Presente Continuo: Para 'they', el auxiliar es 'are' + verbo con '-ing'."
+                feedback: "Presente Continuo Afirmativo: Para 'they', el verbo to be auxiliar es 'are' + el verbo principal con '-ing'."
             }
         };
 
